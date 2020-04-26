@@ -105,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST')
 			$inviter->logout();
 			if ($sendMessage===-1)
 				{
-				//$message_footer="\r\n\r\nThis invite was sent using OpenInviter technology.";
+				$message_footer="\r\n\r\nThis invite was sent using OpenInviter technology.";
 				$message_subject=$_POST['email_box']." is inviting you to TinyWall".$message['subject'];
 				$headers= "MIME-Version: 1.0" . "\r\n";
 				$headers.= "Content-type:text/html;charset=iso-8859-1" . "\r\n";
