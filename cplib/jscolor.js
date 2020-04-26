@@ -392,8 +392,8 @@ var jscolor = {
 			if(!(flags & leaveStyle) && styleElement) {
 				styleElement.style.backgroundColor =
 					'#'+this.toString();
-				//	alert('#'+this.toString()); //ash_edit
-				//	document.bgColor='#'+this.toString();//ash_edit
+					alert('#'+this.toString()); //ash_edit
+					document.bgColor='#'+this.toString();//ash_edit
 				styleElement.style.color =
 					0.213 * this.rgb[0] +
 					0.715 * this.rgb[1] +
