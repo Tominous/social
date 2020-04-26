@@ -39,7 +39,7 @@ function getValidDate(fbDate){
 	valid_date.setMonth(arrDateCode[1]-1);
 	valid_date.setDate(arrDateCode[2]);
     var arrTimeCode = strTimeCode.split(":"); 
-    //var offset=parseInt(new Date(parseInt(fbDate)).getTimezoneOffset());
+    var offset=parseInt(new Date(parseInt(fbDate)).getTimezoneOffset());
     valid_date.setHours(arrTimeCode[0]);
 	valid_date.setMinutes(arrTimeCode[1]);
 	valid_date.setSeconds(arrTimeCode[2]);
@@ -93,11 +93,11 @@ function get_link_data(id,url){
 	$.get(base_url+"public/geturldata.php?url="+url,function(response){
 	var title=(/<title>(.*?)<\/title>/m).exec(response)[1];
 	var logo=(/src='(.*?).png'/m).exec(response)[1];
-	//if(logo){
+	if(logo){
 		$("#"+id).html("<a href='"+url+"'><b>"+title+"</b><br/>"+url+"</a>");
-	//}else{
-	//	$("#"+id).html("<a href='"+url+"'><img src='"+logo+".png' class='img'/><b>"+title+"</b><br/>"+url+"</a>");	
-	//}
+	}else{
+		$("#"+id).html("<a href='"+url+"'><img src='"+logo+".png' class='img'/><b>"+title+"</b><br/>"+url+"</a>");	
+	}
 	});
 }
 //------------------------ status -----------------------------------
@@ -108,14 +108,14 @@ function makeStatusLoadChanges(){
 		$(this).next('.tw-status-comment-button').show();
 		$(this).empty().focus();
 	});
-	/*$('.tw-status-comment-temp-textbox').blur(function(){
+	$('.tw-status-comment-temp-textbox').blur(function(){
 		$(this).css({'height':'10px','width':'385px'});
 		$(this).next('.tw-status-comment-button').hide();
 		$(this).empty();
-	});*/
+	});
 	
-	//$('.tw-status-comment-temp-textbox').elastic();
-	//$('.tw-comment-box').elastic();
+	$('.tw-status-comment-temp-textbox').elastic();
+	$('.tw-comment-box').elastic();
 	
 	$(".tw-status-comment-temp-textbox").toggleVal({
 		focusClass: "hasFocus",
@@ -157,7 +157,7 @@ function getStatusLikes(status_id){
 	 });
 }
 function postStatus(){
-	/*$.ajax({
+	$.ajax({
 	   type: "POST",dataType:'json',url:base_url+"status/postStatus",
 	   data: "message="+$('#newStatusBox').val()+"&status_post_type="+status_post_type+"&status_post_link="+$('#newStatusLink').val()+"&status_post_video="+$('#newStatusVideo').val()+"&owner="+current_user,
 	   success: function(msg){
@@ -165,7 +165,7 @@ function postStatus(){
 		 makeStatusLoadChanges();
 		 
 	   }
-	 });*/
+	 });
 	 $.ajaxFileUpload
 		(
 			{
@@ -176,7 +176,7 @@ function postStatus(){
 				data: {message:$('#newStatusBox').val(),status_post_type:status_post_type,status_post_link:$('#newStatusLink').val(),status_post_video:$('#newStatusVideo').val(),owner:current_user},
 				success:function(msg,status)
 				{
-					//alert(msg);
+					alert(msg);
 					$('#newstatus').html(displayStatus(msg)+$('#newstatus').html());$(".tw-status-outer").show('slow');$(".tw-comment-outer").fadeIn('slow');
 					makeStatusLoadChanges();
 				},
@@ -272,8 +272,8 @@ function displayStatus(msg){
 							output+="<a onclick='unlikeStatus("+msg.status[i].id+")'>Unike</a>";
 						}
 					output+="</span>";
-					//output+="</div>";
-					//output+="<div class='tw-status-post-info-likes'>";
+					output+="</div>";
+					output+="<div class='tw-status-post-info-likes'>";
 					output+=" <a id='like-count-outer_"+msg.status[i].id+"' onclick='getStatusLikes("+msg.status[i].id+")'><img src='"+base_url+"images/themes/default/status_like.png' /> ";
 					output+="<span id='like-count_"+msg.status[i].id+"'>"+msg.status[i].like_count+"</span>";
 					output+="</a></div>";
@@ -319,8 +319,8 @@ function displayStatus(msg){
 							output+="<a onclick='unlikeStatus("+msg.status[i].id+")'>Unike</a>";
 						}
 					output+="</span>";
-					//output+="</div>";
-					//output+="<div class='tw-status-post-info-likes'>";
+					output+="</div>";
+					output+="<div class='tw-status-post-info-likes'>";
 					output+=" <a id='like-count-outer_"+msg.status[i].id+"' onclick='getStatusLikes("+msg.status[i].id+")'><img src='"+base_url+"images/themes/default/status_like.png' /> ";
 					output+="<span id='like-count_"+msg.status[i].id+"'>"+msg.status[i].like_count+"</span>";
 					output+="</a></div>";
@@ -369,8 +369,8 @@ function displayComments(msg){
 							output+="<a id='like-links_"+msg.status[i].id+"' onclick='unlikeStatus("+msg.status[i].id+")'>Unike</a>";
 						}
 					output+="</span>";
-					//output+="</div>";
-					//output+="<div class='tw-status-post-info-likes'>";
+					output+="</div>";
+					output+="<div class='tw-status-post-info-likes'>";
 					output+=" <a id='like-count-outer_"+msg.status[i].id+"' onclick='getStatusLikes("+msg.status[i].id+")'><img src='"+base_url+"images/themes/default/status_like.png' /> ";
 					output+="<span id='like-count_"+msg.status[i].id+"'>"+msg.status[i].like_count+"</span>";
 					output+="</a></div>";
