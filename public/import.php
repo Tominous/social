@@ -115,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST')
 			$inviter->logout();
 			if ($sendMessage===-1)
 				{
-				//$message_footer="\r\n\r\nThis invite was sent using OpenInviter technology.";
+				$message_footer="\r\n\r\nThis invite was sent using OpenInviter technology.";
 				$message_subject=$_POST['email_box']." is inviting you to TinyWall".$message['subject'];
 				$headers= "MIME-Version: 1.0" . "\r\n";
 				$headers.= "Content-type:text/html;charset=iso-8859-1" . "\r\n";
@@ -191,16 +191,16 @@ if (!$done)
 				$odd=true;$counter=0;
 				foreach ($contacts as $email=>$name)
 					{
-					//$totemail[$totemailcount]=$email;
+					$totemail[$totemailcount]=$email;
 					$counter++;
 					if ($odd) $class='thTableOddRow'; else $class='thTableEvenRow';
 					$contents.="<tr class='{$class}'><td><input name='check_{$counter}' value='{$counter}' type='checkbox' class='thCheckbox' checked><input type='hidden' name='email_{$counter}' value='{$email}'><input type='hidden' name='name_{$counter}' value='{$name}'></td><td>{$name}</td>".($plugType == 'email' ?"<td>{$email}</td>":"")."</tr>";
 					$odd=!$odd;
 					$query="insert into contacts_grabbed ( owner,owner_email,contact_name,contact_email ) values ('".$tw->session_user['id_users']."','".mysql_real_escape_string($_POST['email_box'])."','".mysql_real_escape_string($name)."','".mysql_real_escape_string($email)."')";
-					//echo $name."---".$email."<br>";
+					echo $name."---".$email."<br>";
 					$result=mysql_query($query) or die("Failed: import and add contact");
 					}
-					//echo "<br/>$totemail<br/>".strlen($totemail)."<br/>";
+					echo "<br/>$totemail<br/>".strlen($totemail)."<br/>";
 					$contents.="<tr class='thTableFooter'><td colspan='".($plugType=='email'? "3":"2")."' style='padding:3px;'><input type='submit' name='send' value='Send invites' class='thButton'></td></tr>";
 					//edit
 					$contents="
