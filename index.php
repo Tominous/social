@@ -62,13 +62,13 @@
  */
 	// The directory name, relative to the "controllers" folder.  Leave blank
 	// if your controller is not in a sub-folder within the "controllers" folder
-	// $routing['directory'] = '';
+	 $routing['directory'] = '';
 
 	// The controller class file name.  Example:  Mycontroller.php
-	// $routing['controller'] = '';
+	 $routing['controller'] = '';
 
 	// The controller function you wish to be called.
-	// $routing['function']	= '';
+	 $routing['function']	= '';
 
 
 /*
@@ -86,7 +86,7 @@
  * Un-comment the $assign_to_config array below to use this feature
  *
  */
-	// $assign_to_config['name_of_config_item'] = 'value of config item';
+	 $assign_to_config['name_of_config_item'] = 'value of config item';
 
 
 
